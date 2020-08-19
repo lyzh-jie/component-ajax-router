@@ -34,9 +34,6 @@ const actions = {
             commit('DECREMENT')
         }, 1000)
     }
-
-
-
 };
 export default new Vuex.Store({
     state,
