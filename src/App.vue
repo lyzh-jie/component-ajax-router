@@ -4,40 +4,27 @@
       click {{count }} times,count is
       {{evenOrOdd}}
     </p>
-    <button @click="decrement">+</button>
-    <button @click="increment">-</button>
+    <button @click="INCREMENT">+</button>
+    <button @click="DECREMENT">-</button>
     <button @click="incrementIfOdd">increment if odd</button>
     <button @click="decrementIfAync">decrement async</button>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations, mapGetters } from "vuex";
 export default {
   mounted() {
     console.log(this.$store);
   },
   computed: {
-    count() {
-      return this.$store.state.count;
-    },
-    evenOrOdd() {
-      return this.$store.getters.evenOrOdd;
-    }
+    ...mapState(["count"]),
+    ...mapGetters(["evenOrOdd"])
   },
 
   methods: {
-    decrement() {
-      this.$store.commit("INCREMENT");
-    },
-    increment() {
-      this.$store.commit("DECREMENT");
-    },
-    incrementIfOdd() {
-      this.$store.dispatch("incrementIfOdd");
-    },
-    decrementIfAync() {
-      this.$store.dispatch("decrementIfAync");
-    }
+    ...mapActions(["incrementIfOdd", "decrementIfAync"]),
+    ...mapMutations(["INCREMENT", "DECREMENT"])
   }
 };
 </script>
